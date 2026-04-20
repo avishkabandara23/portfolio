@@ -4,7 +4,7 @@ title: "Avishka Hansana | Full Stack Developer & Cloud Engineer 🚀"
 description: "Full Stack Developer and Cloud & DevOps Engineer (Azure, GCP, OCI). Explore my professional journey from networking and enterprise support to creating modern web experiences. 🚀💻"
 author: "Avishka Hansana Bandara"
 image:
-  url: "/images/avishka-profile.jpg"
+  url: "/images/efeeleprofile.jpeg"
   alt: "Photo of Avishka Hansana Bandara — Datacenter & Infrastructure Engineer"
 ---
 

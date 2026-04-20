@@ -17,6 +17,8 @@ const {
   instagramIconName,
   githubIconName,
 } = staticData.data;
+
+const safeBaseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL;
 ---
 
 <footer
@@ -31,7 +33,7 @@ const {
     <div
       class="relative h-6 cursor-pointer before:absolute before:left-1/2 before:top-1/2 before:h-full before:w-[40%] before:-translate-x-1/2 before:-translate-y-1/2 before:rounded-full before:bg-[#50fd8f25] before:blur-3xl before:opacity-80 before:-z-1 hover:text-mint-500 transition-all [text-shadow:0_1px_2px_#000]"
     >
-      <a href="/" aria-label="Return to homepage">
+      <a href={`${safeBaseUrl}/`} aria-label="Return to homepage">
         <span class="font-black text-xl tracking-tight">Avishka</span>
       </a>
     </div>

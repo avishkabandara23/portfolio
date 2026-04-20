@@ -9,16 +9,18 @@ const { items = [] }: { items: (keyof typeof menu)[] } = Astro.props as {
   items: (keyof typeof menu)[];
 };
 
+const safeBaseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL;
+
 const menu = {
-  about: { name: "About Me", path: "/about-me" },
+  about: { name: "About Me", path: `${safeBaseUrl}/about-me` },
   blog: {
     name: "Blog",
-    path: "/blog/",
-    dropdown: [{ name: "All Posts", path: "/blog/posts/" }],
+    path: `${safeBaseUrl}/blog/`,
+    dropdown: [{ name: "All Posts", path: `${safeBaseUrl}/blog/posts/` }],
   },
-  home: { name: "Home", path: "/#home" },
-  experience: { name: "Experience", path: "/#experience" },
-  projects: { name: "Projects", path: "/#projects" },
+  home: { name: "Home", path: `${safeBaseUrl}/#home` },
+  experience: { name: "Experience", path: `${safeBaseUrl}/#experience` },
+  projects: { name: "Projects", path: `${safeBaseUrl}/#projects` },
 };
 
 // Common base classes
@@ -36,7 +38,8 @@ const baseClasses = {
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const isHome = window.location.pathname === "/";
+    const basePath = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL.slice(0, -1) : import.meta.env.BASE_URL;
+    const isHome = window.location.pathname === basePath || window.location.pathname === basePath + "/";
 
     // Classes for link states
     const linkClasses = {
@@ -92,7 +95,7 @@ const baseClasses = {
             if (sectionId) {
               navLinks.forEach((link) => {
                 const path = link.getAttribute("data-path");
-                toggleLinkClasses(link, path === `/#${sectionId}`);
+                toggleLinkClasses(link, path === `${basePath}/#${sectionId}`);
               });
             }
           }

@@ -19,6 +19,10 @@ const {
   portfolioImage,
   contactSectionButtonText,
 } = staticData.data;
+
+const safeBaseUrl = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL.slice(0, -1)
+  : import.meta.env.BASE_URL;
 ---
 
 <section
@@ -42,8 +46,8 @@ const {
           </div>
           <div class="relative z-20 flex w-full rounded-full bg-mint-900">
             <div
-              class="w-full aspect-square rounded-full bg-center bg-cover"
-              style={`background-image: url(${import.meta.env.BASE_URL}${profileImage.startsWith('/') ? profileImage.slice(1) : profileImage})`}
+              class="w-full aspect-square rounded-full bg-top bg-cover"
+              style={`background-image: url(${safeBaseUrl}/${profileImage.startsWith("/") ? profileImage.slice(1) : profileImage})`}
               aria-label={profileAlt}
             >
               <a
@@ -56,7 +60,7 @@ const {
       </div>
 
       <div
-        class="flex h-full w-7/12 flex-col justify-center gap-4 p-4 max-md:w-full max-md:gap-2"
+        class="flex h-full w-7/12 flex-col justify-center gap-3 p-4 max-md:w-full max-md:gap-2"
       >
         <span
           class="relative inline-flex items-center text-xs font-semibold leading-0 dark:text-white text-blacktext max-md:font-medium max-sm:justify-center"
@@ -77,9 +81,42 @@ const {
         >
           <span
             class="bg-linear-to-r from-riptide-500 to-mint-500 bg-clip-text font-black text-transparent dark:from-riptide-300 dark:to-mint-200"
-            >Datacenter & Infrastructure Engineer,</span
-          > specializing in enterprise virtualization, advanced network defense, and resilient systems architecture. I am passionate about securing mission-critical infrastructure, automating deployments, and maintaining high availability across organizational platforms. 🚀🔐
+            >Certified Datacenter Infrastructure & Cloud Engineer,</span
+          > specializing in enterprise virtualization, advanced network defense, and
+          resilient systems architecture. Passionate about securing mission-critical
+          infrastructure, automating deployments, and maintaining high availability
+          across organizational platforms. 🚀🔐
         </p>
+
+        <div
+          class="flex gap-4 items-center max-sm:justify-center mt-[-0.25rem] mb-[-0.25rem]"
+        >
+          <img
+            src="https://api.certmetrics.com/lenovo/badges/2/5.png"
+            alt="Lenovo Datacenter Technical Badge"
+            class="h-14 w-auto object-contain transition-transform duration-300 hover:scale-110"
+          />
+          <img
+            src={`${safeBaseUrl}/images/badge/1_ik9N6EPd6H6ElO3R_N-Suw.png`}
+            alt="Google Cloud Professional Cloud Architect Badge"
+            class="h-14 w-auto object-contain transition-transform duration-300 hover:scale-110"
+          />
+          <img
+            src={`${safeBaseUrl}/images/badge/microsoft-certified-associate-badge.svg`}
+            alt="Microsoft Certified Associate Badge"
+            class="h-14 w-auto object-contain transition-transform duration-300 hover:scale-110"
+          />
+          <img
+            src={`${safeBaseUrl}/images/badge/OCI25DOPOCP.png`}
+            alt="Oracle Cloud Infrastructure 2025 Professional"
+            class="h-14 w-auto object-contain transition-transform duration-300 hover:scale-110"
+          />
+          <img
+            src={`${safeBaseUrl}/images/badge/image.png`}
+            alt="Nutanix Multicloud Infrastructure Professional"
+            class="h-14 w-auto object-contain transition-transform duration-300 hover:scale-110"
+          />
+        </div>
 
         <div class="flex gap-4 max-sm:flex-col max-sm:items-center">
           <Button
@@ -198,7 +235,7 @@ const {
         </p>
         <img
           class="relative left-0 z-0 mt-40 w-full object-cover transition-all ease-in-out duration-500 group-hover:rotate-2 group-hover:scale-185 max-xl:mt-28 max-lg:mt-10 max-sm:mt-0 max-md:scale-100 max-sm:scale-125 scale-180 max-md:group-hover:scale-105 before:bg-[radial-gradient(circle,rgba(13,188,130)_0,rgba(1,45,34)_100%)] before:absolute before:left-30 before:-bottom-0 before:h-[80%] before:aspect-square before:rounded-full before:blur-3xl before:opacity-80 before:-z-10 before:transition"
-          src={`${import.meta.env.BASE_URL}${portfolioImage.startsWith('/') ? portfolioImage.slice(1) : portfolioImage}`}
+          src={`${safeBaseUrl}/${portfolioImage.startsWith("/") ? portfolioImage.slice(1) : portfolioImage}`}
           alt="View of two website interfaces with modern and dark design. The first screen shows the title 'Behind the Code' with a rocket and dark background, explaining the origin of a community software project. The second screen presents a platform for finding speakers, with an attractive design, expert photos, and a prominent search button."
           loading="lazy"
           width="480"
