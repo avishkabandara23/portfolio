@@ -1,0 +1,39 @@
+{
+  "profileImage": "/images/efeeleprofile.webp",
+  "profileAlt": "Photo of Avishka Hansana — Full Stack Developer",
+  "profileLink": "/about-me",
+  "profileTitle": "Full Stack Developer",
+  "profileName": "Avishka Hansana",
+  "github": "https://github.com/avishkahansana",
+  "githubText": "Check out my GitHub!",
+  "portfolioImage": "/images/portfolio.webp",
+  "email": "avishkahansana@gmail.com",
+  "linkedin": "https://www.linkedin.com/in/avishkahansana/",
+  "instagram": "https://www.instagram.com/avishkahansana/",
+  "youtube": "https://www.youtube.com/@avishkahansana",
+  "alias": "Avishka",
+  "contactSectionTitle": "Ready to take your idea to the next level?",
+  "contactSectionSubtitle": "Let's work together.",
+  "contactSectionButtonText": "Contact Me",
+  "contactSectionButtonIcon": "paperplane",
+  "techsTitle": "TECHS",
+  "instagramIconName": "instagram",
+  "youtubeIconName": "youtube",
+  "githubIconName": "github",
+  "linkedinIconName": "linkedin",
+  "emailIconName": "envelope",
+  "hobbies": [
+    "Coding",
+    "Gaming",
+    "Music",
+    "Photography",
+    "Movies",
+    "Travel"
+  ],
+  "pageTitle": "Avishka Hansana | Full Stack Developer Portfolio",
+  "pageDescription": "Full Stack Developer passionate about building modern web applications and digital experiences.",
+  "OGImage": {
+    "url": "/images/imagedefault.webp",
+    "alt": "Portfolio of Avishka Hansana — Full Stack Developer. Showcasing modern web projects, skills in React, Node.js, and more."
+  }
+}

@@ -1,0 +1,54 @@
+---
+import ExperienceItem from "./ExperienceItem.astro";
+import Heading from "../ui/Heading.astro";
+import { Icon } from "astro-icon/components";
+
+const EXPERIENCE = [
+  {
+    date: "2023 - Present",
+    title: "Full Stack Developer",
+    company: "Freelance / Self-Employed",
+    description:
+      "Designing and developing full-stack web applications for clients across various industries. Building responsive UIs with React and Next.js, RESTful APIs with Node.js and Express, and managing databases like MySQL and MongoDB.",
+  },
+  {
+    date: "2022 - 2023",
+    title: "Junior Web Developer",
+    company: "Personal Projects & Open Source",
+    description:
+      "Built and deployed multiple web projects to expand skills in modern JavaScript frameworks, version control with Git, and cloud hosting. Contributed to open-source repositories and collaborated with developer communities.",
+  },
+];
+
+---
+
+<section class="py-8 px-8 max-md:py-4 mb-4 scroll-m-16" id="experience">
+  <div class="flex flex-col pt-8 max-w-4xl mx-auto">
+    <div class="flex gap-4 items-center justify-center">
+      <Icon class="text-3xl dark:text-white text-blacktext" name="briefcase" />
+      <Heading text="Work" textGradient="Experience" level={2} />
+    </div>
+
+    <div class="relative max-md:mt-0 mt-8" aria-label="Professional experience">
+      <ol class="relative mt-10">
+        {
+          EXPERIENCE.map((experience, index) => (
+            <li>
+              <article
+                role="article"
+                aria-labelledby={`experience-title-${index}`}
+              >
+                <div
+                  class="flex flex-col gap-2  text-zinc-00 dark:text-zinc-300 md:col-span-3"
+                  aria-describedby={`experience-title-${index}`}
+                >
+                  <ExperienceItem {...experience} />
+                </div>
+              </article>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>
