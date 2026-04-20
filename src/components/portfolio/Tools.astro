@@ -1,36 +1,36 @@
 ---
-const allTools = [
-  "html",
-  "javascript",
-  "ts",
-  "angular",
-  "astro",
-  
-  "node",
+const infraTools = [
+  "design_impl",
+  "hardware_ss",
+  "storage_net",
+  "power",
+  "cooling",
+  "networking",
+  "intercom",
+  "ibm_as400",
+  "cable_layering",
+  "fiber",
+  "dr_solutions",
+  "lenovo",
+  "hpe",
+  "dell",
+  "cisco_ucs",
+  "broadcom",
+];
 
-  "css",
-  "tailwind",
-  "sass",
-  "bootstrap",
-
-  "mongo",
-  "firebase",
-  "mysql",
-
-  "cloudflare",
-
-  "figma",
-  "vercel",
-  "netlify",
-  
-  "git",
-  "markdown",
-
-  "php",
-  "wordpress",
+const virtTools = [
+  "vmware",
+  "hyperv",
+  "nutanix",
+  "xcp_ng",
+  "xen",
+  "fusion_compute",
+  "openstack",
+  "openshift",
 ];
 
 import Capsule from "../ui/Capsule.astro";
+import { Icon } from "astro-icon/components";
 
 type ToolVariant = "default" | "center";
 
@@ -49,6 +49,44 @@ const { variant = "default", linkEnabled = false, size = "md" } = Astro.props;
 const classes = `${baseClasses} ${variantClasses[variant as ToolVariant]}`;
 ---
 
-<div class={classes}>
-  {allTools.map((tool) => <Capsule lang={tool} linkEnabled={linkEnabled} size={size} />)}
+<div class="flex flex-col gap-6">
+  <div class="flex flex-col gap-4">
+    <div class="flex items-center gap-2">
+      <div class="h-px grow bg-zinc-200 dark:bg-zinc-800"></div>
+      <div class="flex items-center gap-2">
+        <Icon name="briefcase" class="text-xs text-mint-500" />
+        <p class="text-[10px] font-black tracking-[.2em] uppercase bg-linear-to-r from-riptide-500 to-mint-400 dark:from-riptide-500 dark:to-mint-500 text-transparent bg-clip-text">
+          Datacenter & Infrastructure
+        </p>
+      </div>
+      <div class="h-px grow bg-zinc-200 dark:bg-zinc-800"></div>
+    </div>
+    <div class={classes}>
+      {
+        infraTools.map((tool) => (
+          <Capsule lang={tool} linkEnabled={linkEnabled} size={size} />
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-4">
+    <div class="flex items-center gap-2">
+      <div class="h-px grow bg-zinc-200 dark:bg-zinc-800"></div>
+      <div class="flex items-center gap-2">
+        <Icon name="rocket" class="text-xs text-mint-500" />
+        <p class="text-[10px] font-black tracking-[.2em] uppercase bg-linear-to-r from-riptide-500 to-mint-400 dark:from-riptide-500 dark:to-mint-500 text-transparent bg-clip-text">
+          Virtualization
+        </p>
+      </div>
+      <div class="h-px grow bg-zinc-200 dark:bg-zinc-800"></div>
+    </div>
+    <div class={classes}>
+      {
+        virtTools.map((tool) => (
+          <Capsule lang={tool} linkEnabled={linkEnabled} size={size} />
+        ))
+      }
+    </div>
+  </div>
 </div>

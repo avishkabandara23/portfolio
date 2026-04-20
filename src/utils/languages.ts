@@ -110,6 +110,150 @@ export const languages: Record<string, Language> = {
     name: "Python",
     iconName: "python",
   },
+  san: {
+    name: "SAN",
+    iconName: "dashboard",
+  },
+  nas: {
+    name: "NAS",
+    iconName: "dashboard",
+  },
+  sds: {
+    name: "SDS",
+    iconName: "dashboard",
+  },
+  blade: {
+    name: "BLADE Servers",
+    iconName: "dashboard",
+  },
+  arch321: {
+    name: "3-2-1 Architecture",
+    iconName: "dashboard",
+  },
+  hci: {
+    name: "HCI",
+    iconName: "dashboard",
+  },
+  vmware: {
+    name: "VMware",
+    iconName: "dashboard",
+  },
+  nutanix: {
+    name: "Nutanix",
+    iconName: "dashboard",
+  },
+  hyperv: {
+    name: "Hyper-V",
+    iconName: "dashboard",
+  },
+  proxmox: {
+    name: "Proxmox",
+    iconName: "dashboard",
+  },
+  cisco: {
+    name: "Cisco Networking",
+    iconName: "dashboard",
+  },
+  vpn: {
+    name: "VPN & MPLS",
+    iconName: "info",
+  },
+  googlecloud: {
+    name: "Google Cloud",
+    iconName: "dashboard",
+  },
+  oracle: {
+    name: "Oracle Cloud",
+    iconName: "dashboard",
+  },
+  infra: {
+    name: "Infrastructure",
+    iconName: "briefcase",
+  },
+  design_impl: {
+    name: "Designing & Implementation",
+    iconName: "dashboard",
+  },
+  hardware_ss: {
+    name: "Hardware Servers & Storage",
+    iconName: "dashboard",
+  },
+  storage_net: {
+    name: "Storage Networking",
+    iconName: "dashboard",
+  },
+  power: {
+    name: "Power",
+    iconName: "info",
+  },
+  cooling: {
+    name: "Cooling",
+    iconName: "info",
+  },
+  networking: {
+    name: "Networking",
+    iconName: "dashboard",
+  },
+  intercom: {
+    name: "Intercom",
+    iconName: "info",
+  },
+  ibm_as400: {
+    name: "IBM AS400",
+    iconName: "briefcase",
+  },
+  cable_layering: {
+    name: "Cable Layering",
+    iconName: "info",
+  },
+  fiber: {
+    name: "Fiber",
+    iconName: "rocket",
+  },
+  dr_solutions: {
+    name: "DR Solutions",
+    iconName: "briefcase",
+  },
+  lenovo: {
+    name: "Lenovo",
+    iconName: "dashboard",
+  },
+  hpe: {
+    name: "HPE",
+    iconName: "dashboard",
+  },
+  dell: {
+    name: "Dell",
+    iconName: "dashboard",
+  },
+  cisco_ucs: {
+    name: "Cisco UCS",
+    iconName: "dashboard",
+  },
+  broadcom: {
+    name: "Broadcom",
+    iconName: "dashboard",
+  },
+  xcp_ng: {
+    name: "XCP-NG",
+    iconName: "dashboard",
+  },
+  xen: {
+    name: "Xen",
+    iconName: "dashboard",
+  },
+  fusion_compute: {
+    name: "Fusion Compute",
+    iconName: "dashboard",
+  },
+  openstack: {
+    name: "Open Stack",
+    iconName: "briefcase",
+  },
+  openshift: {
+    name: "Openshift",
+    iconName: "rocket",
+  },
 };
 
 export const getLanguage = (lang: string): Language => {
