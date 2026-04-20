@@ -1,46 +1,46 @@
 ---
 layout: /src/layouts/MarkdownAbout.astro
-title: "Avishka Hansana | My Journey in Technology and Web Development 🚀"
-description: "Full Stack Developer, technology enthusiast, and problem solver. From my beginnings in coding to building real-world applications, here I share my journey, experiences, and learnings. 🚀💻"
-author: "Avishka Hansana"
+title: "Avishka Hansana | Full Stack Developer & Cloud Engineer 🚀"
+description: "Full Stack Developer and Cloud & DevOps Engineer (Azure, GCP, OCI). Explore my professional journey from networking and enterprise support to creating modern web experiences. 🚀💻"
+author: "Avishka Hansana Bandara"
 image:
-  url: "/images/efeeleprofile.webp"
-  alt: "Photo of Avishka Hansana — Full Stack Developer"
+  url: "/images/avishka-profile.jpg"
+  alt: "Photo of Avishka Hansana Bandara — Datacenter & Infrastructure Engineer"
 ---
 
-I started my journey into technology driven by curiosity and a love for building things. From the very first time I wrote a line of code, I knew this was my passion. Over time, that curiosity evolved into a professional pursuit — creating modern, user-friendly web applications that make a real difference.
+I am a passionate **Full Stack Developer** and **Cloud & DevOps Engineer**, dedicated to building modern web applications and creating impactful digital experiences. My journey began with a deep curiosity about computer internals and software, which has since evolved into a rich professional career spanning scalable web solutions, enterprise-level technical support, and cloud infrastructure.
 
-## My Beginnings in Programming 🖥️
+## Professional Experience 💼
 
-My interest in computers started early. I was fascinated by how software worked behind the scenes — how a few lines of text could create something interactive and visual on a screen. I started with the basics: **HTML** and **CSS**, building small static pages and experimenting with layouts. It wasn't long before I dove into **JavaScript**, unlocking real interactivity and logic.
+Throughout my career, I've had the opportunity to work across various disciplines in tech, blending software engineering with deep infrastructure knowledge.
 
-As I grew more comfortable, I began exploring frameworks and libraries. **React** became my go-to for building dynamic UIs, while I simultaneously learned backend development with **Node.js** and **Express**, giving me full-stack capabilities.
+- **Customer Support Engineer (Lenovo / IBM)** @ *Trident Corporation Pvt Ltd* *(Present)*  
+  Providing expert-level technical support and managing enterprise infrastructure for Lenovo and IBM systems.
+- **Full Stack Developer** @ *Freelance* *(2023 - Present)*  
+  Designing and developing full-stack web applications for diverse industries. Specializing in responsive UIs (React, Next.js, Astro) and RESTful APIs (Node.js, Express), while efficiently managing databases like MySQL and MongoDB.
+- **Former Technical Support Engineer** @ *TRENDnet*
+- **Former System / Network Engineer** @ *Multi-System Technologies*
+- **Junior Web Developer** *(Open Source & Personal Projects)*
 
-## Expanding My Skills 🚀
+## Education 🎓
 
-Over the years I've worked on a wide variety of projects — from landing pages and portfolios to full-scale web applications with databases, authentication, and APIs. Each project taught me something new, whether it was about performance optimization, responsive design, or software architecture.
+My academic background laid the foundation for my deep technical understanding of both software and networks:
+- **University of Moratuwa**
+- **Lincoln University College** — Specialized in Network Engineering and Cybersecurity.
 
-Some of the technologies I work with regularly:
+## Technical Skills & Stack 🚀
 
-- **Frontend:** React, Next.js, Astro, TailwindCSS, TypeScript
-- **Backend:** Node.js, Express, REST APIs
-- **Databases:** MySQL, MongoDB, PostgreSQL
-- **Tools:** Git, VS Code, Figma, Postman
+I continuously explore new technologies and refine my toolset to deliver robust solutions:
 
-## Sharing Knowledge 🧠
-
-I believe that the best way to solidify knowledge is to share it. Whether it's helping a friend debug their first project or documenting solutions to problems I've encountered, I enjoy contributing to the community.
-
-> Learning never stops — and neither does building.
-
-## What's Next... 🚀
-
-I'm constantly looking to improve my skills, explore new technologies, and work on meaningful projects. I'm currently open to new opportunities, collaborations, and interesting challenges in web development.
+- **Frontend:** HTML5, CSS3, JavaScript, TypeScript, Angular, Astro, Tailwind CSS, Sass, React, Next.js
+- **Backend:** Node.js, Express, RESTful APIs
+- **Cloud & DevOps:** Azure, Google Cloud Platform (GCP), Oracle Cloud Infrastructure (OCI), Cloudflare, Vercel
+- **Databases:** MySQL, MongoDB
 
 ## A Bit More About Me 🎮
 
-Outside of coding, I enjoy gaming, listening to music, and exploring new places through travel. I'm always up for a good movie night or a creative session with coffee in hand. ☕🎶
+When I'm not coding or managing cloud workloads, I enjoy delving into content creation on YouTube and exploring the world. I believe that learning never stops — and neither does building. 
 
-I'm **Avishka Hansana**, and I thank you for reading this.
+I'm **Avishka Hansana Bandara**, and I thank you for reading this.
 
 ## Let's Create Amazing Things Together! 🚀
