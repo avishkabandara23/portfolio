@@ -1,6 +1,6 @@
 ---
 layout: /src/layouts/ProjectLayout.astro
-title: 'Centralized Customer & Service Management Web Portal'
+title: 'Centralized Customer & Service Management Web Portal - Trident Corporation'
 pubDate: 2026-03-01
 description: 'A centralized web application to streamline IT service management, replacing fragmented Excel workflows with a unified digital platform.'
 languages: ["PHP", "Python", "JavaScript", "HTML", "CSS", "Windows IIS Server"]

@@ -1,6 +1,6 @@
 ---
 layout: /src/layouts/ProjectLayout.astro
-title: '14-Node Nutanix HCI Cluster Deployment for Kubernetes Workloads'
+title: '14-Node Nutanix HCI Cluster Deployment for Kubernetes Workloads - Commercial Bank PLC'
 pubDate: 2025-12-01
 description: 'Orchestrated a 14-node Nutanix HCI deployment to modernize core banking applications and host mission-critical Kubernetes clusters.'
 languages: ["Nutanix HCI", "Kubernetes", "Lenovo ThinkAgile", "HCI"]
