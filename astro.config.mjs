@@ -9,6 +9,9 @@ import icon from "astro-icon";
 export default defineConfig({
   site: "https://avishkabandara23.github.io",
   base: "/portfolio",
+  devToolbar: {
+    enabled: false,
+  },
   integrations: [preact(), icon(), sitemap({
     filter: (page) =>
       !page.includes("/blog/tags") &&
