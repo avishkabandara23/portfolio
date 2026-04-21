@@ -34,12 +34,18 @@
   --color-riptide-950: #03302f;
 
   --animate-rotate: rotate 10s linear infinite;
-
   --animate-rotate-border: border-rotate 3s linear infinite;
+  --animate-vertical-marquee: vertical-marquee 20s linear infinite;
+
   @keyframes border-rotate {
     to {
       --border-angle: 360deg;
     }
+  }
+
+  @keyframes vertical-marquee {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
   }
 }
 

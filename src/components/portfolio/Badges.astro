@@ -1,0 +1,30 @@
+---
+const BADGES = [
+  { name: "Nutanix", imageSrc: "/portfolio/icons/nutanix.png" },
+  { name: "VMware", imageSrc: "/portfolio/icons/vmware.png" },
+  { name: "Microsoft", imageSrc: "/portfolio/icons/microsoft.png" },
+];
+---
+
+<section class="py-12 bg-zinc-50/50 dark:bg-zinc-900/20 border-y border-zinc-200 dark:border-zinc-800/50 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-16">
+      <div class="flex items-center gap-2">
+         <span class="text-[11px] font-black tracking-[.3em] uppercase text-mint-600 dark:text-mint-400 whitespace-nowrap">
+            Certifications & Badges
+         </span>
+      </div>
+      <div class="flex flex-wrap items-center gap-12 md:gap-20 opacity-80 hover:opacity-100 transition-opacity duration-500">
+        {BADGES.map((badge) => (
+          <div class="flex items-center group cursor-default">
+            <img 
+              src={badge.imageSrc} 
+              alt={`${badge.name} Certification Badge`} 
+              class="h-10 w-auto transition-all duration-300 group-hover:scale-110 filter drop-shadow-sm"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

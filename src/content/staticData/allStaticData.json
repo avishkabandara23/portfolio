@@ -1,9 +1,9 @@
 {
   "profileImage": "/images/efeeleprofile.jpeg",
-  "profileAlt": "Photo of Avishka Hansana Bandara — Datacenter & Infrastructure Engineer",
+  "profileAlt": "Photo of Avishka H. Bandara — Datacenter & Infrastructure Engineer",
   "profileLink": "/about-me",
   "profileTitle": "Datacenter & Infrastructure Engineer",
-  "profileName": "Avishka Hansana Bandara",
+  "profileName": "Avishka H. Bandara",
   "github": "https://github.com/avishkahansana",
   "githubText": "Check out my GitHub!",
   "portfolioImage": "/images/portfolio.webp",
@@ -11,7 +11,7 @@
   "linkedin": "https://www.linkedin.com/in/avishkahansana/",
   "instagram": "https://www.instagram.com/avishkahansana/",
   "youtube": "https://www.youtube.com/@avishkahansana",
-  "alias": "Avishka",
+  "alias": "Avishka H. Bandara",
   "contactSectionTitle": "Ready to take your idea to the next level?",
   "contactSectionSubtitle": "Let's work together.",
   "contactSectionButtonText": "Contact Me",
@@ -30,10 +30,10 @@
     "Movies",
     "Travel"
   ],
-  "pageTitle": "Avishka Hansana Bandara | Datacenter & Infrastructure Engineer",
+  "pageTitle": "Avishka H. Bandara | Datacenter & Infrastructure Engineer",
   "pageDescription": "Datacenter & Infrastructure Engineer specializing in enterprise virtualization, advanced network defense, and high-availability architecture.",
   "OGImage": {
     "url": "/images/imagedefault.webp",
-    "alt": "Portfolio of Avishka Hansana Bandara — Datacenter & Infrastructure Engineer. Showcasing skills in enterprise architecture, network defense, virtualization, and more."
+    "alt": "Portfolio of Avishka H. Bandara — Datacenter & Infrastructure Engineer. Showcasing skills in enterprise architecture, network defense, virtualization, and more."
   }
 }

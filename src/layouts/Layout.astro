@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
+import Badges from "../components/portfolio/Badges.astro";
 import  SpeedInsights  from "@vercel/speed-insights/astro"
 const {
   pageTitle = "NeonMint by EFEELE 🚀",
@@ -81,11 +82,36 @@ const twitterimage = `${siteUrl}${ogimage.url}`;
     >
     </div>
     <Header />
+    
+    <!-- Global Vertical Badges Sidebar -->
+    <aside class="fixed left-0 top-[75px] h-[calc(100%-75px)] w-20 hidden lg:flex flex-col items-center justify-start py-12 gap-10 z-50 border-r border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-black/50 backdrop-blur-xl">
+      <div class="flex flex-col gap-12 items-center">
+        <span class="[writing-mode:vertical-lr] rotate-180 text-[10px] font-black tracking-[.3em] uppercase text-zinc-400 dark:text-zinc-500 mb-4 whitespace-nowrap">
+           Certifications
+        </span>
+        <div class="flex flex-col items-center overflow-hidden h-[400px] relative">
+          <div class="flex flex-col gap-10 items-center animate-vertical-marquee hover:[animation-play-state:paused]">
+            <!-- Original set -->
+            <img src="/portfolio/images/badge/OCI25DOPOCP.png" alt="Oracle Cloud Infrastructure DevOps Professional" class="h-12 w-auto hover:scale-110 transition-transform filter drop-shadow-md" />
+            <img src="/portfolio/images/badge/image.png" alt="Nutanix Certified Professional" class="h-12 w-auto hover:scale-110 transition-transform filter drop-shadow-md" />
+            <img src="/portfolio/images/badge/microsoft-certified-associate-badge.svg" alt="Microsoft Certified Associate" class="h-12 w-auto hover:scale-110 transition-transform filter drop-shadow-md" />
+            <img src="/portfolio/icons/vmware.png" alt="VMware" class="h-8 w-auto hover:scale-110 transition-transform filter drop-shadow-md" />
+            
+            <!-- Duplicated set for seamless loop -->
+            <img src="/portfolio/images/badge/OCI25DOPOCP.png" alt="Oracle Cloud Infrastructure DevOps Professional" class="h-12 w-auto hover:scale-110 transition-transform filter drop-shadow-md" />
+            <img src="/portfolio/images/badge/image.png" alt="Nutanix Certified Professional" class="h-12 w-auto hover:scale-110 transition-transform filter drop-shadow-md" />
+            <img src="/portfolio/images/badge/microsoft-certified-associate-badge.svg" alt="Microsoft Certified Associate" class="h-12 w-auto hover:scale-110 transition-transform filter drop-shadow-md" />
+            <img src="/portfolio/icons/vmware.png" alt="VMware" class="h-8 w-auto hover:scale-110 transition-transform filter drop-shadow-md" />
+          </div>
+        </div>
+      </div>
+    </aside>
 
-    <div class="min-h-[85vh] ">
+    <div class="min-h-[85vh] xl:pl-20 transition-all duration-300">
       <slot />
     </div>
 
+    <!-- Hidden global horizontal badges as they are now in the sidebar -->
     <Footer />
     <script>
       import "../scripts/menu.js";
