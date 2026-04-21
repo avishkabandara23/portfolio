@@ -1,36 +1,55 @@
 ---
-const infraTools = [
-  "design_impl",
-  "hardware_ss",
-  "storage_net",
-  "power",
-  "cooling",
-  "networking",
-  "intercom",
-  "ibm_as400",
-  "cable_layering",
-  "fiber",
-  "dr_solutions",
-  "lenovo",
-  "hpe",
-  "dell",
-  "cisco_ucs",
-  "broadcom",
+type Tool = { name: string; imageSrc?: string };
+
+const infraTools: Tool[] = [
+  { name: "Designing & Implementation", imageSrc: "/portfolio/icons/ux.png" },
+  {
+    name: "Hardware Servers & Storage",
+    imageSrc: "/portfolio/icons/server.png",
+  },
+  { name: "Storage Networking", imageSrc: "/portfolio/icons/storagenet.png" },
+  { name: "Power", imageSrc: "/portfolio/icons/battery.png" },
+  { name: "Cooling", imageSrc: "/portfolio/icons/thermometer.png" },
+  { name: "Networking", imageSrc: "/portfolio/icons/networking.png" },
+  { name: "Intercom", imageSrc: "/portfolio/icons/intercom.png" },
+  { name: "IBM AS400", imageSrc: "/portfolio/icons/ibm.png" },
+  {
+    name: "Cable Layering",
+    imageSrc: "/portfolio/icons/construction-worker.png",
+  },
+  { name: "Fiber", imageSrc: "/portfolio/icons/optical-fiber.png" },
+  { name: "DR Solutions", imageSrc: "/portfolio/icons/data-center.png" },
+  { name: "Lenovo", imageSrc: "/portfolio/icons/lenovo.png" },
+  { name: "HPE" },
+  { name: "Dell", imageSrc: "/portfolio/icons/dell.png" },
+  { name: "Cisco UCS", imageSrc: "/portfolio/icons/cisco.png" },
+  { name: "Broadcom", imageSrc: "/portfolio/icons/broadcom.png" },
 ];
 
-const virtTools = [
-  "vmware",
-  "hyperv",
-  "nutanix",
-  "xcp_ng",
-  "xen",
-  "fusion_compute",
-  "openstack",
-  "openshift",
+const virtTools: Tool[] = [
+  { name: "VMware", imageSrc: "/portfolio/icons/vmware.png" },
+  { name: "Hyper-V", imageSrc: "/portfolio/icons/microsoft.png" },
+  { name: "Nutanix", imageSrc: "/portfolio/icons/nutanix.png" },
+  { name: "XCP-NG" },
+  { name: "Xen" },
+  { name: "Fusion Compute" },
+  { name: "Open Stack" },
+  { name: "Openshift" },
+  { name: "IBM PowerVM", imageSrc: "/portfolio/icons/ibm.png" },
+];
+
+const osTools: Tool[] = [
+  { name: "Microsoft Windows Server" },
+  { name: "Oracle Linux" },
+  { name: "Redhat Linux" },
+  { name: "CentOS" },
+  { name: "Xen Server" },
+  { name: "IBM OS/2" },
+  { name: "AIX" },
+  { name: "Unix Platforms" },
 ];
 
 import Capsule from "../ui/Capsule.astro";
-import { Icon } from "astro-icon/components";
 
 type ToolVariant = "default" | "center";
 
@@ -54,8 +73,9 @@ const classes = `${baseClasses} ${variantClasses[variant as ToolVariant]}`;
     <div class="flex items-center gap-2">
       <div class="h-px grow bg-zinc-200 dark:bg-zinc-800"></div>
       <div class="flex items-center gap-2">
-        <Icon name="briefcase" class="text-xs text-mint-500" />
-        <p class="text-[10px] font-black tracking-[.2em] uppercase bg-linear-to-r from-riptide-500 to-mint-400 dark:from-riptide-500 dark:to-mint-500 text-transparent bg-clip-text">
+        <p
+          class="text-[10px] font-black tracking-[.2em] uppercase bg-linear-to-r from-riptide-500 to-mint-400 dark:from-riptide-500 dark:to-mint-500 text-transparent bg-clip-text"
+        >
           Datacenter & Infrastructure
         </p>
       </div>
@@ -64,7 +84,12 @@ const classes = `${baseClasses} ${variantClasses[variant as ToolVariant]}`;
     <div class={classes}>
       {
         infraTools.map((tool) => (
-          <Capsule lang={tool} linkEnabled={linkEnabled} size={size} />
+          <Capsule
+            lang={tool.name}
+            imageSrc={tool.imageSrc}
+            linkEnabled={linkEnabled}
+            size={size}
+          />
         ))
       }
     </div>
@@ -74,8 +99,9 @@ const classes = `${baseClasses} ${variantClasses[variant as ToolVariant]}`;
     <div class="flex items-center gap-2">
       <div class="h-px grow bg-zinc-200 dark:bg-zinc-800"></div>
       <div class="flex items-center gap-2">
-        <Icon name="rocket" class="text-xs text-mint-500" />
-        <p class="text-[10px] font-black tracking-[.2em] uppercase bg-linear-to-r from-riptide-500 to-mint-400 dark:from-riptide-500 dark:to-mint-500 text-transparent bg-clip-text">
+        <p
+          class="text-[10px] font-black tracking-[.2em] uppercase bg-linear-to-r from-riptide-500 to-mint-400 dark:from-riptide-500 dark:to-mint-500 text-transparent bg-clip-text"
+        >
           Virtualization
         </p>
       </div>
@@ -84,7 +110,38 @@ const classes = `${baseClasses} ${variantClasses[variant as ToolVariant]}`;
     <div class={classes}>
       {
         virtTools.map((tool) => (
-          <Capsule lang={tool} linkEnabled={linkEnabled} size={size} />
+          <Capsule
+            lang={tool.name}
+            imageSrc={tool.imageSrc}
+            linkEnabled={linkEnabled}
+            size={size}
+          />
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-4">
+    <div class="flex items-center gap-2">
+      <div class="h-px grow bg-zinc-200 dark:bg-zinc-800"></div>
+      <div class="flex items-center gap-2">
+        <p
+          class="text-[10px] font-black tracking-[.2em] uppercase bg-linear-to-r from-riptide-500 to-mint-400 dark:from-riptide-500 dark:to-mint-500 text-transparent bg-clip-text"
+        >
+          Operating Systems
+        </p>
+      </div>
+      <div class="h-px grow bg-zinc-200 dark:bg-zinc-800"></div>
+    </div>
+    <div class={classes}>
+      {
+        osTools.map((tool) => (
+          <Capsule
+            lang={tool.name}
+            imageSrc={tool.imageSrc}
+            linkEnabled={linkEnabled}
+            size={size}
+          />
         ))
       }
     </div>
