@@ -36,6 +36,7 @@
   --animate-rotate: rotate 10s linear infinite;
   --animate-rotate-border: border-rotate 3s linear infinite;
   --animate-vertical-marquee: vertical-marquee 20s linear infinite;
+  --animate-horizontal-marquee: horizontal-marquee 40s linear infinite;
 
   @keyframes border-rotate {
     to {
@@ -46,6 +47,11 @@
   @keyframes vertical-marquee {
     0% { transform: translateY(0); }
     100% { transform: translateY(-50%); }
+  }
+
+  @keyframes horizontal-marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
 }
 

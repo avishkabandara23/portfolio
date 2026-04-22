@@ -3,25 +3,72 @@ import "../styles/global.css";
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
 import Badges from "../components/portfolio/Badges.astro";
-import  SpeedInsights  from "@vercel/speed-insights/astro"
+import  SpeedInsights  from "@vercel/speed-insights/astro";
+
 const {
-  pageTitle = "NeonMint by EFEELE 🚀",
-  description = "Welcome to NeonMint by EFEELE, where I develop software and share knowledge.",
+  pageTitle = "Avishka H. Bandara | Datacenter & Infrastructure Engineer 🚀",
+  description = "Certified Datacenter Infrastructure & Cloud Engineer specializing in enterprise virtualization and high-availability architecture.",
   ogimage = {
     url: "/portfolio/images/imagedefault.webp",
-    alt: "Default image of EFEELE",
+    alt: "Avishka H. Bandara",
   },
 } = Astro.props;
 
+// List of all 43 certification badges from public/images/badge/
+const allBadges = [
+  "OCI25DOPOCP.png",
+  "image.png",
+  "microsoft-certified-associate-badge.svg",
+  "I2CS__1_.png",
+  "Intro2IoT.png",
+  "MYSQLDBA80OCP_cached_image_20250813-32-u63xha.png",
+  "MYSQLHWIMPOCA_cached_image_20250923-31-1j96kx.png",
+  "MYSQLIMPOCA_cached_image_20250923-32-tu1in2.png",
+  "OCI2024FNDCFA_cached_image_20250813-31-d0xb83.png",
+  "OCI23AIFCA_cached_image_20250813-31-b2oc2s.png",
+  "OCI25CAA_cached_image_20250813-30-npsze9.png",
+  "OCI25DCFAV2_cached_image_20250813-31-lzyvgl.png",
+  "OCI25DOPOCP_cached_image_20250821-31-rhr958.png",
+  "OCI25FNDCFAV1_cached_image_20250813-31-me6piy.png",
+  "OCIF2023CA_cached_image_20250813-32-dkdu8s.png",
+  "blob (1).png",
+  "blob.png",
+  "converted20251111-31-qzeacg.png",
+  "image (1).png",
+  "image (2).png",
+  "image (3).png",
+  "image (4).png",
+  "image (5).png",
+  "image (6).png",
+  "image (7).png",
+  "image (8).png",
+  "image (9).png",
+  "image (10).png",
+  "image (11).png",
+  "image (12).png",
+  "image (13).png",
+  "image (14).png",
+  "image (15).png",
+  "image (16).png",
+  "image (17).png",
+  "image (18).png",
+  "image (19).png",
+  "image (20).png",
+  "image (21).png",
+  "image (22).png",
+  "image (23).png",
+  "image (24).png",
+  "image (25).png"
+];
+
 const siteUrl = new URL(Astro.url).origin;
 const SEO = {
-  sitename: "NeonMint by EFEELE🚀",
+  sitename: "Avishka H. Bandara🚀",
   url: siteUrl,
   locale: "en_US",
-  author: "Fernando Lopez | EFEELE",
-  twitter: "@efeeledev",
+  author: "Avishka H. Bandara",
+  twitter: "@avishkahansana",
 };
-
 
 const twitterimage = `${siteUrl}${ogimage.url}`;
 ---
@@ -82,26 +129,52 @@ const twitterimage = `${siteUrl}${ogimage.url}`;
     >
     </div>
     <Header />
-    
-    <!-- Global Vertical Badges Sidebar -->
-    <aside class="fixed left-0 top-[75px] h-[calc(100%-75px)] w-20 hidden lg:flex flex-col items-center justify-start py-12 gap-10 z-50 border-r border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-black/50 backdrop-blur-xl">
-      <div class="flex flex-col gap-12 items-center">
-        <span class="[writing-mode:vertical-lr] rotate-180 text-[10px] font-black tracking-[.3em] uppercase text-zinc-400 dark:text-zinc-500 mb-4 whitespace-nowrap">
-           Certifications
+
+    <!-- Mobile Certification Bar (Horizontal Marquee) -->
+    <div class="lg:hidden w-full overflow-hidden bg-zinc-50/50 dark:bg-zinc-900/50 border-b border-zinc-200 dark:border-zinc-800 py-3 backdrop-blur-md relative">
+      <!-- Background Watermark -->
+      <div class="absolute inset-0 flex items-center justify-center opacity-15 pointer-events-none">
+        <span class="text-2xl font-black tracking-[0.15em] uppercase whitespace-nowrap text-zinc-400 dark:text-zinc-500">Certifications</span>
+      </div>
+      
+      <div class="relative w-full overflow-hidden">
+        <div class="flex gap-8 items-center animate-horizontal-marquee whitespace-nowrap" style="animation-duration: 60s;">
+          {[...allBadges, ...allBadges].map((badge) => (
+            <img
+              src={`/portfolio/images/badge/${badge}`}
+              alt="Certification Badge"
+              class="h-10 w-auto filter drop-shadow-sm flex-shrink-0"
+              loading="lazy"
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Global Certification Sidebar (Fixed on Desktop) -->
+    <aside
+      class="fixed left-0 top-[75px] h-[calc(100%-75px)] w-20 hidden lg:flex flex-col items-center py-6 border-r border-zinc-200 dark:border-zinc-800 bg-linear-to-b from-white/80 to-transparent dark:from-zinc-900/80 backdrop-blur-xl z-40 transition-all pointer-events-none hover:pointer-events-auto"
+    >
+      <div class="flex flex-col items-center h-full">
+        <span
+          class="[writing-mode:vertical-lr] rotate-180 text-[10px] font-black tracking-[.3em] uppercase text-zinc-400 dark:text-zinc-500 mb-4 whitespace-nowrap"
+        >
+          Certifications
         </span>
-        <div class="flex flex-col items-center overflow-hidden h-[400px] relative">
-          <div class="flex flex-col gap-10 items-center animate-vertical-marquee hover:[animation-play-state:paused]">
-            <!-- Original set -->
-            <img src="/portfolio/images/badge/OCI25DOPOCP.png" alt="Oracle Cloud Infrastructure DevOps Professional" class="h-12 w-auto hover:scale-110 transition-transform filter drop-shadow-md" />
-            <img src="/portfolio/images/badge/image.png" alt="Nutanix Certified Professional" class="h-12 w-auto hover:scale-110 transition-transform filter drop-shadow-md" />
-            <img src="/portfolio/images/badge/microsoft-certified-associate-badge.svg" alt="Microsoft Certified Associate" class="h-12 w-auto hover:scale-110 transition-transform filter drop-shadow-md" />
-            <img src="/portfolio/icons/vmware.png" alt="VMware" class="h-8 w-auto hover:scale-110 transition-transform filter drop-shadow-md" />
-            
-            <!-- Duplicated set for seamless loop -->
-            <img src="/portfolio/images/badge/OCI25DOPOCP.png" alt="Oracle Cloud Infrastructure DevOps Professional" class="h-12 w-auto hover:scale-110 transition-transform filter drop-shadow-md" />
-            <img src="/portfolio/images/badge/image.png" alt="Nutanix Certified Professional" class="h-12 w-auto hover:scale-110 transition-transform filter drop-shadow-md" />
-            <img src="/portfolio/images/badge/microsoft-certified-associate-badge.svg" alt="Microsoft Certified Associate" class="h-12 w-auto hover:scale-110 transition-transform filter drop-shadow-md" />
-            <img src="/portfolio/icons/vmware.png" alt="VMware" class="h-8 w-auto hover:scale-110 transition-transform filter drop-shadow-md" />
+        <div class="flex flex-col items-center overflow-hidden h-[85vh] relative">
+          <div
+            class="flex flex-col gap-10 items-center animate-vertical-marquee hover:[animation-play-state:paused]"
+            style="animation-duration: 100s;"
+          >
+            <!-- Duplicated list for seamless vertical loop -->
+            {[...allBadges, ...allBadges].map((badge) => (
+              <img
+                src={`/portfolio/images/badge/${badge}`}
+                alt="Certification Badge"
+                class="h-12 w-auto hover:scale-110 transition-transform filter drop-shadow-md"
+                loading="lazy"
+              />
+            ))}
           </div>
         </div>
       </div>
