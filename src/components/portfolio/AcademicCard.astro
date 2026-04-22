@@ -1,0 +1,170 @@
+---
+interface Props {
+  imageSrc: string;
+  title: string;
+  institution: string;
+  description: string;
+  subjects: string[];
+  logos?: string[];
+  verificationLinks?: {
+    text: string;
+    url: string;
+    note?: string;
+    icon?: string;
+  }[];
+}
+
+const { imageSrc, title, institution, description, subjects, logos, verificationLinks } = Astro.props;
+---
+
+<div
+  class="grid md:grid-cols-5 gap-8 items-start bg-zinc-900/50 p-6 rounded-2xl border border-white/5 hover:border-mint-500/30 transition-all duration-300"
+>
+  <div class="md:col-span-2 max-md:hidden">
+    <div
+      class="relative group cursor-pointer overflow-hidden rounded-xl border border-white/10 shadow-2xl"
+    >
+      <img
+        src={imageSrc}
+        alt={title}
+        class="w-full h-auto transition-transform duration-500 group-hover:scale-110"
+      />
+      <div
+        class="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4"
+      >
+        <p class="text-white text-xs font-bold uppercase tracking-wider">
+          View Certificate
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="md:col-span-3 flex flex-col gap-4">
+    <div 
+      class="academic-header-container max-sm:text-center flex items-center justify-between gap-4 cursor-pointer md:cursor-default group/header"
+    >
+      <h3 class="text-lg md:text-2xl font-bold text-mint-400 leading-tight group-hover/header:text-mint-300 transition-colors">
+        {title}
+      </h3>
+      <div class="md:hidden text-mint-400 transition-transform duration-300 academic-chevron">
+        <svg
+          class="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </div>
+    </div>
+
+    <div class="academic-details-container flex flex-col gap-4 max-md:hidden">
+      <div class="md:hidden">
+        <div class="relative group cursor-pointer overflow-hidden rounded-xl border border-white/10 shadow-2xl">
+          <img
+            src={imageSrc}
+            alt={title}
+            class="w-full h-auto transition-transform duration-500 group-hover:scale-110"
+          />
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-4 max-sm:items-center max-sm:text-center">
+        <p class="text-zinc-100 font-semibold">{institution}</p>
+        {logos && (
+          <div class="flex flex-row flex-wrap gap-4 sm:gap-6 items-center justify-center sm:justify-start">
+            {logos.map(logo => (
+              <img 
+                src={logo} 
+                alt="Institutional Logo" 
+                class="h-10 sm:h-16 w-auto object-contain hover:scale-105 transition-transform" 
+              />
+            ))}
+          </div>
+        )}
+      </div>
+
+      <p class="text-zinc-300 text-sm leading-relaxed text-justify">
+        {description}
+      </p>
+
+      <div class="mt-2">
+        <h4
+          class="text-sm font-bold uppercase tracking-widest text-mint-500/80 mb-3 border-b border-white/10 pb-2"
+        >
+          Completed Subjects
+        </h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
+          {
+            subjects.map((subject) => (
+              <div class="flex items-start gap-2 text-[11px] text-zinc-400 font-medium hover:text-white transition-colors">
+                <span class="text-mint-500 mt-0.5">▹</span>
+                <span>{subject}</span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      {verificationLinks && (
+        <div class="mt-6 flex flex-wrap gap-3">
+          {verificationLinks.map(link => (
+            <div class="flex flex-col gap-2 flex-1 min-w-[200px] max-sm:min-w-full">
+              <a 
+                href={link.url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="flex items-center justify-between gap-2 bg-white/5 hover:bg-white/10 border border-white/10 px-4 py-2.5 rounded-lg text-[11px] font-bold text-mint-400 transition-all group/btn"
+              >
+                <span>{link.text}</span>
+                <span class="text-zinc-500 group-hover/btn:translate-x-1 transition-transform">→</span>
+              </a>
+              {link.note && (
+                <p class="text-[10px] text-zinc-500 italic px-2">
+                  Note: {link.note}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+</div>
+
+<script>
+  function setupAcademicExpands() {
+    const headers = document.querySelectorAll('.academic-header-container');
+    
+    headers.forEach(header => {
+      header.addEventListener('click', () => {
+        // Only trigger on mobile
+        if (window.innerWidth >= 768) return;
+
+        const card = header.closest('.grid');
+        if (!card) return;
+        
+        const container = card.querySelector('.academic-details-container');
+        if (!container) return;
+        
+        const chevron = header.querySelector('.academic-chevron');
+        const isExpanded = !container.classList.contains('max-md:hidden');
+        
+        if (isExpanded) {
+          container.classList.add('max-md:hidden');
+          if (chevron) chevron.classList.remove('rotate-180');
+        } else {
+          container.classList.remove('max-md:hidden');
+          if (chevron) chevron.classList.add('rotate-180');
+        }
+      });
+    });
+  }
+
+  setupAcademicExpands();
+  document.addEventListener('astro:after-swap', setupAcademicExpands);
+</script>

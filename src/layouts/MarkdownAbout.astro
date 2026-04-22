@@ -6,7 +6,69 @@ import Experience from "../components/portfolio/Experience.astro";
 import NavArticle from "../components/layout/NavArticle.astro";
 import Contact from "../components/portfolio/Contact.astro";
 import Tools from "../components/portfolio/Tools.astro";
+import AcademicCard from "../components/portfolio/AcademicCard.astro";
 const { frontmatter } = Astro.props;
+
+const safeBaseUrl = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL.slice(0, -1)
+  : import.meta.env.BASE_URL;
+
+const profileImageUrl = frontmatter.image.url.startsWith("/")
+  ? `${safeBaseUrl}${frontmatter.image.url}`
+  : `${safeBaseUrl}/${frontmatter.image.url}`;
+
+const diplomaImageUrl = `${safeBaseUrl}/images/diploma.jpg`;
+
+const diplomaSubjects = [
+  "D|CIT1011 - FUNDAMENTALS OF ICT",
+  "D|CIT1022 - MS OFFICE APPLICATION",
+  "D|CIT1032 - COMPUTER HARDWARE",
+  "D|CIT1042 - INTERNET EMAIL & WEB ENGINEERING",
+  "D|CIT1052 - DATABASE MANAGEMENT",
+  "D|CIT1062 - GRAPHICS, MULTIMEDIA AND SOCIAL MEDIA",
+  "D|CIT1074 - WEB APPLICATION DEVELOPMENT PROJECT",
+  "D|DIT2082 - COMPUTER NETWORKING & CYBER SECURITY",
+  "D|DIT2091 - SOFTWARE ENGINEERING",
+  "D|DIT2102 - PYTHON PROGRAMMING",
+  "D|DIT2113 - PROGRAMMING WITH C#",
+  "D|DIT2121 - IOT - INTERNET OF THINGS",
+  "D|DIT2131 - AI - ARTFICIAL INTELLIGANCE",
+  "D|DIT2145 - SOFTWARE DEVELOPMENT PROJECT",
+];
+
+const hndSubjects = [
+  "H|HIT31303 - DATA STRUCTURES & ALGORITHMS",
+  "H|HIT31402 - ADVANCED DATABASE SYSTEMS",
+  "H|HIT31502 - MOBILE APPLICATION DEVELOPMENT",
+  "H|HIT31603 - COMPUTER NETWORKING & CYBER SECURITY",
+  "H|HIT31703 - WEB ENGINEERING & CLOUD COMPUTING",
+  "H|HIT31802 - IT PROFESSION & ETHICS",
+  "H|HIT41902 - PROBABILITY, STATISTICS & DATA ANALYTICS WITH R",
+  "H|HIT42003 - ROBOTICS & ARTIFICIAL INTELLIGENCE",
+  "H|HIT42102 - INTERNET OF THINGS (IOT)",
+  "H|HIT42202 - TECHNOLOGY ENTREPRENEURSHIP",
+  "H|HIT42302 - RESEARCH METHODS IN COMPUTING",
+  "H|HIT42404 - CAPSTONE PROJECT",
+];
+
+const bachelorSubjects = [
+  "CSLPA-372 - Cyber security law and policy analysis",
+  "INM-373 - Industrial management",
+  "AST-382 - Advanced Switching Technology and Troubleshoot",
+  "SAD-375 - System Analysis and Design",
+  "BCSAI-6033 - Business English",
+  "CUM-241 - Introduction to C++",
+  "DSA-251 - Data Structure & Algorithm",
+  "WSA-381 - Microsoft Windows Server Administration",
+  "AFI-373 - Artificial Intelligence",
+  "CBS-381 - Cyber Security Management",
+  "ART-374 - Advanced Routing Technology",
+  "IRT-242 - Inter Routing Technology",
+  "LNXA-371 - Linux Administration",
+  "PM-261 - Project Management",
+  "VEP-391 - Values and Ethics in profession",
+  "WLC-384 - Wireless Communication",
+];
 ---
 
 <script>
@@ -44,8 +106,9 @@ const { frontmatter } = Astro.props;
               </div>
               <div class="relative z-20 flex w-full rounded-full bg-mint-900">
                 <div
-                  class="w-full aspect-square rounded-full bg-[url(/images/efeeleprofile.webp)] bg-center bg-cover"
-                  aria-label="Photo of Avishka Hansana — Full Stack Developer"
+                  class="w-full aspect-square rounded-full bg-top bg-cover"
+                  style={`background-image: url(${profileImageUrl})`}
+                  aria-label={frontmatter.image.alt}
                 >
                   <a
                     href="/about-me"
@@ -62,13 +125,16 @@ const { frontmatter } = Astro.props;
             </div>
 
             <p
-              class="text-lg max-xl:text-base text-blacktext dark:text-gray-200 mb-0 leading-8 font-semibold"
+              class="text-lg max-xl:text-base text-blacktext dark:text-gray-200 mb-0 leading-8 font-semibold text-justify"
             >
               <b
                 class="bg-linear-to-r from-riptide-400 to-mint-500 dark:to-mint-200 dark:from-riptide-300 text-transparent bg-clip-text"
-                >Full Stack Developer</b
-              >, passionate about building modern web apps and creating
-              impactful digital experiences. I love bringing ideas to life with code. 🚀💻
+                >Certified Datacenter Infrastructure & Cloud Engineer</b
+              >, specializing in enterprise virtualization, advanced network
+              defense, and resilient systems architecture. Passionate about
+              securing mission-critical infrastructure, automating deployments,
+              and maintaining high availability across organizational platforms.
+              🚀🔐
             </p>
           </div>
         </div>
@@ -77,7 +143,7 @@ const { frontmatter } = Astro.props;
         <Heading text="About" textGradient="me" />
       </div>
 
-      <div class="markdown text-white" id="content">
+      <div class="markdown text-white text-justify" id="content">
         <slot />
       </div>
     </article>
@@ -86,9 +152,63 @@ const { frontmatter } = Astro.props;
   <section class="py-8 px-8 max-md:py-4 mb-4 scroll-m-16" id="experience">
     <div class="flex flex-col gap-8 pt-8 max-w-4xl mx-auto">
       <div class="flex gap-4 items-center justify-center">
-        <Icon class="text-3xl text-white" name="briefcase" />
-        <Heading text="Experience" textGradient="Work" level={2} />
+        <Icon class="text-3xl text-white" name="person" />
+        <Heading text="Academics" level={2} />
       </div>
+
+      <AcademicCard
+        imageSrc={diplomaImageUrl}
+        title="Bachelor of Computer Science (Hons) (Network Technology and Cybersecurity)"
+        institution="Lincoln University College Malyasia"
+        description="Completed BCompSc (Hons) (Network Technology and Cybersecurity) from Lincoln University Malaysia."
+        subjects={bachelorSubjects}
+        logos={[
+          `${safeBaseUrl}/images/LOGO-HI-RES.png`,
+          `${safeBaseUrl}/images/images.png`,
+        ]}
+      />
+
+      <AcademicCard
+        imageSrc={diplomaImageUrl}
+        title="Higher National Diploma in Information Communication Technology"
+        institution="ABE University UK provided by IMBS Green Campus"
+        description="Still Completing Higher National Diploma in Information Communication Technology from ABE UK provided by IMBS Green Campus."
+        subjects={hndSubjects}
+        logos={[
+          `${safeBaseUrl}/images/logo-main-r.png`,
+          `${safeBaseUrl}/images/logo.png`,
+          `${safeBaseUrl}/images/w3--.png`,
+        ]}
+      />
+
+      <AcademicCard
+        imageSrc={diplomaImageUrl}
+        title="Diploma in Information Communication Technology"
+        institution="ABE University UK provided by IMBS Green Campus"
+        description="Completed Diploma in Information Communication Technology from ABE UK provided by IMBS Green Campus."
+        subjects={diplomaSubjects}
+        logos={[
+          `${safeBaseUrl}/images/logo-main-r.png`,
+          `${safeBaseUrl}/images/logo.png`,
+          `${safeBaseUrl}/images/w3--.png`,
+        ]}
+        verificationLinks={[
+          {
+            text: "View Transcript",
+            url: "https://www.imbs.lk/resultverification/",
+            note: "Student Number: C113083 | Branch: Head Office",
+          },
+          {
+            text: "Verify via DLCSL",
+            url: "https://www.dlcsrilanka.org/imbs-campus.html",
+            note: "Verification ID: 991091432V",
+          },
+          {
+            text: "View Certificate & Transcript",
+            url: "https://drive.google.com/file/d/1KxRvm5sz3DUaI8bXWaWnf8hoVyz2UEb4/view",
+          },
+        ]}
+      />
 
       <Experience />
     </div>

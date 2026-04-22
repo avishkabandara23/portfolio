@@ -79,17 +79,19 @@ const { title, company, description, link, date } = Astro.props;
 
       btn.addEventListener('click', () => {
         const isExpanded = container.classList.contains('max-md:line-clamp-none');
+        const span = btn.querySelector('span');
+        const svg = btn.querySelector('svg');
         
         if (isExpanded) {
           container.classList.remove('max-md:line-clamp-none');
           container.classList.add('max-md:line-clamp-4');
-          btn.querySelector('span').textContent = 'Read More';
-          btn.querySelector('svg').classList.remove('rotate-180');
+          if (span) span.textContent = 'Read More';
+          if (svg) svg.classList.remove('rotate-180');
         } else {
           container.classList.remove('max-md:line-clamp-4');
           container.classList.add('max-md:line-clamp-none');
-          btn.querySelector('span').textContent = 'Show Less';
-          btn.querySelector('svg').classList.add('rotate-180');
+          if (span) span.textContent = 'Show Less';
+          if (svg) svg.classList.add('rotate-180');
         }
       });
     });
