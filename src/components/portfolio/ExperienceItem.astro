@@ -33,9 +33,69 @@ const { title, company, description, link, date } = Astro.props;
       </time>
     </div>
   </div>
-  <div
-    class="flex flex-col gap-2 pb-4 text-zinc-00 dark:text-zinc-300 md:col-span-3"
-  >
-    {description}
+  <div class="md:col-span-3">
+    <div
+      class="description-container relative flex flex-col gap-2 pb-4 text-zinc-600 dark:text-zinc-300 whitespace-pre-line text-justify max-md:line-clamp-4 transition-all duration-300"
+    >
+      {description}
+    </div>
+    <button
+      class="expand-btn hidden max-md:flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-mint-400 mt-2 hover:text-mint-500 transition-colors"
+    >
+      <span>Read More</span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-3 w-3 transform transition-transform duration-300"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="3"
+          d="M19 9l-7 7-7-7"
+        />
+      </svg>
+    </button>
   </div>
 </div>
+
+<script>
+  function setupExpandButtons() {
+    const containers = document.querySelectorAll('.description-container');
+    
+    containers.forEach(container => {
+      const parent = container.parentElement;
+      const btn = parent?.querySelector('.expand-btn');
+      
+      if (!btn || !container) return;
+
+      // Only show button if text is actually truncated (on mobile)
+      const isTruncated = container.scrollHeight > container.clientHeight;
+      if (!isTruncated) {
+        btn.classList.add('hidden');
+      }
+
+      btn.addEventListener('click', () => {
+        const isExpanded = container.classList.contains('max-md:line-clamp-none');
+        
+        if (isExpanded) {
+          container.classList.remove('max-md:line-clamp-none');
+          container.classList.add('max-md:line-clamp-4');
+          btn.querySelector('span').textContent = 'Read More';
+          btn.querySelector('svg').classList.remove('rotate-180');
+        } else {
+          container.classList.remove('max-md:line-clamp-4');
+          container.classList.add('max-md:line-clamp-none');
+          btn.querySelector('span').textContent = 'Show Less';
+          btn.querySelector('svg').classList.add('rotate-180');
+        }
+      });
+    });
+  }
+
+  // Run on initial load and after any view transitions
+  setupExpandButtons();
+  document.addEventListener('astro:after-swap', setupExpandButtons);
+</script>

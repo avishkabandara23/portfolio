@@ -1,8 +1,8 @@
 ---
 layout: /src/layouts/ProjectLayout.astro
-title: 'Datacenter Migration - Suwasariya Foundation'
+title: 'Datacenter Migration - I3 Cubes (Pvt) Ltd.'
 pubDate: 2026-03-28
-description: 'Complete migration of the Suwasariya Foundation datacenter to a new location with zero downtime.'
+description: 'Complete migration of the I3 Cubes (Pvt) Ltd datacenter to a new location with zero downtime.'
 languages: ["Datacenter", "Networking", "Migrations"]
 image:
   url: "/portfolio/images/imagedefault.webp"
@@ -13,4 +13,4 @@ image:
 
 ## Description
 
-This project involved the complete migration of the Suwasariya Foundation's datacenter to a new location. The primary client requirement was to achieve zero downtime and prevent any service interruptions, ensuring the Foundation's critical 24/7 call center and system servers remained fully operational during the transition. Additionally, the project scope included the physical relocation and re-installation of the existing network infrastructure at the new site.
+Led the seamless end-to-end data center migration for I3 Cubes (Pvt) Ltd, specifically managing the infrastructure for the Suwasariya Foundation. Spearheaded the physical relocation and re-installation of Network Racks, server enclosures, and core Datacenter Infrastructure with a strict Zero-Downtime mandate. Successfully maintained 100% availability for mission-critical 24/7 emergency call center systems while implementing high-security Firewall configurations to ensure 99% hardened perimeter protection and secure external connectivity throughout the transition.
