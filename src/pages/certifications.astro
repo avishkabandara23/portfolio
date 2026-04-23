@@ -1,0 +1,289 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Heading from "../components/ui/Heading.astro";
+import { Icon } from "astro-icon/components";
+import CertNavNode from "../components/portfolio/CertNavNode.astro";
+
+import fs from 'node:fs';
+import path from 'node:path';
+
+// --- DEEP NESTED AUTO-DETECTION LOGIC ---
+function getPdfFiles(dir: string, baseDir: string, fileList: string[] = []): string[] {
+  if (!fs.existsSync(dir)) return fileList;
+  const files = fs.readdirSync(dir);
+  for (const file of files) {
+    const name = path.join(dir, file);
+    if (fs.statSync(name).isDirectory()) {
+      getPdfFiles(name, baseDir, fileList);
+    } else if (file.endsWith('.pdf')) {
+      fileList.push(path.relative(baseDir, name).replace(/\\/g, '/'));
+    }
+  }
+  return fileList;
+}
+
+const publicCertsDir = path.join(process.cwd(), 'public', 'certifications');
+const pdfPaths = getPdfFiles(publicCertsDir, publicCertsDir);
+
+const root: Record<string, any> = {};
+
+pdfPaths.forEach((relPath) => {
+  const pathElements = relPath.split('/');
+  
+  let current = root;
+  
+  for (let i = 0; i < pathElements.length; i++) {
+    const element = pathElements[i];
+    const isFile = element.endsWith('.pdf');
+    
+    if (isFile) {
+      const fileName = element.replace('.pdf', '');
+      const webPath = `/portfolio/certifications/${relPath}`;
+      current[fileName] = { name: fileName, type: 'file', path: webPath };
+    } else {
+      if (!current[element]) {
+        current[element] = { name: element, type: 'folder', children: {} };
+      }
+      current = current[element].children;
+    }
+  }
+});
+
+// Ensure all physical folders in public/certifications are represented in root
+if (fs.existsSync(publicCertsDir)) {
+  const physicalFolders = fs.readdirSync(publicCertsDir);
+  physicalFolders.forEach(folder => {
+    const folderPath = path.join(publicCertsDir, folder);
+    if (fs.statSync(folderPath).isDirectory() && !root[folder]) {
+      root[folder] = { name: folder, type: 'folder', children: {} };
+    }
+  });
+}
+
+const featuredBadges = [
+  { name: "Lenovo Certified", image: "/portfolio/icons/lenovo.png", vendorKey: "Lenovo" },
+  { name: "Nutanix Certified", image: "/portfolio/icons/Nutanix-Logo.png", vendorKey: "Nutanix" },
+];
+
+const pageTitle = "Certifications | Avishka H. Bandara";
+---
+
+<Layout pageTitle={pageTitle}>
+  <main class="py-16 px-8 max-w-7xl mx-auto min-h-screen">
+    <div class="flex flex-col gap-12 pt-8">
+      <div class="flex flex-col items-center text-center gap-4">
+        <div class="inline-flex items-center justify-center p-3 bg-mint-500/10 rounded-2xl mb-2">
+          <Icon name="rocket" class="text-4xl text-mint-500" />
+        </div>
+        <Heading text="Professional" textGradient="Certifications" level={1} />
+        <p class="max-w-2xl text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
+          Recursive Explorer automatically organizes your technical documents regardless of depth.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-12">
+        <div class="flex flex-wrap items-center justify-center gap-12">
+            {featuredBadges.map((badge) => {
+            let firstPdf = "#";
+            try {
+              const vendorNode = root[badge.vendorKey];
+              if (vendorNode) {
+                const searchFirst = (node: any): string => {
+                  if (node.type === 'file') return node.path;
+                  const children = Object.values(node.children || {});
+                  if (children.length > 0) return searchFirst(children[0]);
+                  return "#";
+                };
+                firstPdf = searchFirst(vendorNode);
+                
+                // Fallback to badge page if no PDFs found for Nutanix
+                if (firstPdf === "#" && badge.vendorKey === 'Nutanix') {
+                  firstPdf = "/portfolio/nutanix-badge.html";
+                }
+              }
+            } catch (e) {}
+
+            return (
+              <button 
+                data-cert-path={firstPdf} 
+                data-cert-name={badge.name}
+                class="cert-btn group relative flex flex-col items-center justify-center p-6 bg-white dark:bg-zinc-900/40 border-2 border-mint-500/20 rounded-3xl transition-all duration-500 shadow-[0_10px_40px_rgba(13,188,130,0.05)] cursor-pointer"
+              >
+                <div class="absolute inset-0 bg-linear-to-b from-mint-500/5 to-transparent rounded-3xl"></div>
+                <div class="relative z-10 size-20 flex items-center justify-center">
+                  <img src={badge.image} alt={badge.name} class="max-h-full max-w-full object-contain filter drop-shadow-md group-hover:scale-105 transition-transform duration-500" />
+                </div>
+                <h2 class="mt-4 text-sm font-black text-blacktext dark:text-white uppercase tracking-tight">{badge.name}</h2>
+                <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 bg-mint-500 text-white text-[10px] font-bold rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20">
+                  Open Explorer
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="certModal" class="fixed inset-0 z-[999] hidden overflow-hidden bg-black/90 backdrop-blur-xl items-center justify-center p-0 md:p-8 opacity-0 transition-opacity duration-300">
+    <div class="relative w-full h-full max-w-7xl bg-white dark:bg-zinc-900 rounded-none md:rounded-3xl overflow-hidden flex flex-col shadow-2xl scale-100 md:scale-95 transition-transform duration-300" id="modalContent">
+      <div class="flex items-center justify-between p-4 md:p-5 border-b border-zinc-100 dark:border-zinc-800">
+        <div class="flex items-center gap-3">
+          <button id="toggleMobileSidebar" class="lg:hidden p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors cursor-pointer">
+            <Icon name="bars" class="text-xl text-zinc-500" />
+          </button>
+          <div class="flex flex-col">
+            <h3 id="modalCertName" class="text-sm md:text-lg font-black text-blacktext dark:text-white uppercase tracking-tight truncate max-w-[200px] md:max-w-md">Certification Dashboard</h3>
+            <p id="modalFolderName" class="text-[10px] text-zinc-500 dark:text-zinc-400 uppercase tracking-widest font-bold">Explorer / System Docs</p>
+          </div>
+        </div>
+        <button id="closeModal" class="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-colors group cursor-pointer">
+          <Icon name="xmark" class="text-2xl text-zinc-500 group-hover:text-mint-500 transition-colors" />
+        </button>
+      </div>
+      
+      <div class="flex-1 flex overflow-hidden relative">
+        <aside id="modalSidebar" class="absolute inset-y-0 left-0 z-50 w-72 border-r border-zinc-100 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900 lg:relative lg:translate-x-0 -translate-x-full lg:flex flex-col overflow-y-auto p-4 gap-2 transition-transform duration-300 custom-scrollbar">
+          {Object.values(root).map((vendor: any) => (
+            <div class="flex flex-col gap-1 mb-4">
+              <div class="flex items-center gap-2 px-2 py-1 mb-1">
+                <span class="text-[10px] font-black uppercase tracking-[.4em] text-zinc-400">{vendor.name}</span>
+                <div class="h-px grow bg-zinc-200 dark:bg-zinc-800"></div>
+              </div>
+              {vendor.name === 'Nutanix' && (
+                <div class="mb-2 flex flex-col gap-1">
+                  <button 
+                    data-path="/portfolio/nutanix-badge.html" 
+                    data-name="Nutanix Verified Badge" 
+                    class="sidebar-item flex items-start gap-2 p-2 rounded-lg text-left hover:bg-white dark:hover:bg-zinc-800 transition-all group cursor-pointer w-full bg-mint-500/5 border border-mint-500/10"
+                  >
+                    <Icon name="info" class="text-mint-500 mt-1 shrink-0 text-[10px]" />
+                    <span class="text-[10px] font-bold text-zinc-600 dark:text-zinc-400 group-hover:text-mint-400 leading-tight">
+                      Verify on Credly
+                    </span>
+                  </button>
+                </div>
+              )}
+
+              {Object.values(vendor.children).map((child: any) => (
+                <CertNavNode node={child} vendorName={vendor.name} />
+              ))}
+            </div>
+          ))}
+        </aside>
+        <div id="sidebarOverlay" class="absolute inset-0 z-40 bg-black/40 backdrop-blur-sm hidden lg:hidden opacity-0 transition-opacity duration-300 cursor-pointer"></div>
+        <div class="flex-1 w-full h-full bg-white dark:bg-black relative">
+          <iframe id="certIframe" class="w-full h-full border-none" src=""></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+  .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: #10b98120; border-radius: 10px; }
+  .sidebar-item.active { background-color: white; border-left: 2px solid #10b981; }
+  :global(.dark) .sidebar-item.active { background-color: #18181b; border-color: #10b981; }
+  .sidebar-item.active span { color: #10b981 !important; }
+  :global(.folder-toggle.collapsed .chevron-wrapper) { transform: rotate(0deg); }
+  :global(.folder-toggle:not(.collapsed) .chevron-wrapper) { transform: rotate(90deg); }
+  :global(.folder-content.collapsed) { max-height: 0 !important; opacity: 0; pointer-events: none; }
+</style>
+
+<script is:inline>
+  function setupCertModal() {
+    const modal = document.getElementById('certModal');
+    const modalContent = document.getElementById('modalContent');
+    const iframe = document.getElementById('certIframe');
+    const certNameTitle = document.getElementById('modalCertName');
+    const closeBtn = document.getElementById('closeModal');
+    const certBtns = document.querySelectorAll('.cert-btn');
+    const sidebarItems = document.querySelectorAll('.sidebar-item');
+    const folderToggles = document.querySelectorAll('.folder-toggle');
+    const modalSidebar = document.getElementById('modalSidebar');
+    const toggleMobileSidebar = document.getElementById('toggleMobileSidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+    if (!modal || !iframe || !certNameTitle) return;
+
+    function openModal(path, name) {
+      certNameTitle.textContent = name;
+      iframe.src = path + "#toolbar=0&navpanes=0&scrollbar=0";
+      
+      // Sync active state in sidebar
+      sidebarItems.forEach(i => i.classList.remove('active'));
+      const matchingItem = Array.from(sidebarItems).find(i => i.getAttribute('data-path') === path);
+      if (matchingItem) matchingItem.classList.add('active');
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      setTimeout(() => {
+        modal.classList.add('opacity-100');
+        if (window.innerWidth >= 768) modalContent.classList.add('scale-100');
+      }, 10);
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Updated recursive folder toggle logic
+    document.addEventListener('click', (e) => {
+      const toggle = e.target.closest('.folder-toggle');
+      if (toggle) {
+        const folderName = toggle.getAttribute('data-folder-name');
+        const content = document.getElementById(`folder-${folderName}`);
+        if (!content) return;
+        
+        const isOpening = content.classList.contains('collapsed');
+        content.classList.toggle('collapsed');
+        toggle.classList.toggle('collapsed');
+        
+        const height = content.scrollHeight;
+        content.style.maxHeight = isOpening ? height + "px" : "0px";
+        
+        // Propagate height change to all parent folders
+        let parent = content.parentElement.closest('.folder-content');
+        while (parent) {
+          const currentMax = parseInt(parent.style.maxHeight) || 0;
+          parent.style.maxHeight = (isOpening ? currentMax + height : currentMax - height) + "px";
+          parent = parent.parentElement.closest('.folder-content');
+        }
+      }
+    });
+
+    certBtns.forEach(btn => btn.addEventListener('click', () => {
+      const path = btn.getAttribute('data-cert-path');
+      const name = btn.getAttribute('data-cert-name');
+      if (path) openModal(path, name);
+    }));
+
+    sidebarItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const path = item.getAttribute('data-path');
+        const name = item.getAttribute('data-name');
+        iframe.src = path + "#toolbar=0&navpanes=0&scrollbar=0";
+        certNameTitle.textContent = name;
+        sidebarItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        if (window.innerWidth < 1024) {
+          modalSidebar.classList.add('-translate-x-full');
+          sidebarOverlay.classList.add('hidden');
+        }
+      });
+    });
+
+    toggleMobileSidebar?.addEventListener('click', () => {
+      modalSidebar.classList.remove('-translate-x-full');
+      sidebarOverlay.classList.remove('hidden');
+      setTimeout(() => sidebarOverlay.classList.add('opacity-100'), 10);
+    });
+
+    [sidebarOverlay, closeBtn].forEach(el => el?.addEventListener('click', () => {
+      modal.classList.remove('opacity-100');
+      setTimeout(() => { modal.classList.add('hidden'); iframe.src = ''; }, 300);
+      document.body.style.overflow = '';
+    }));
+  }
+  setupCertModal();
+  document.addEventListener('astro:page-load', setupCertModal);
+</script>

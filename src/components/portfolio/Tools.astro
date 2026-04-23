@@ -24,6 +24,14 @@ const infraTools: Tool[] = [
   { name: "Dell", imageSrc: "/portfolio/icons/dell.png" },
   { name: "Cisco UCS", imageSrc: "/portfolio/icons/cisco.png" },
   { name: "Broadcom", imageSrc: "/portfolio/icons/broadcom.png" },
+  { name: "Synology NAS" },
+];
+
+const securityTools: Tool[] = [
+  { name: "Sophos XGS" },
+  { name: "Kaspersky EDR" },
+  { name: "Zabbix" },
+  { name: "RADIUS" },
 ];
 
 const virtTools: Tool[] = [
@@ -260,6 +268,32 @@ const classes = `${baseClasses} ${variantClasses[variant as ToolVariant]}`;
     <div class={classes}>
       {
         osTools.map((tool) => (
+          <Capsule
+            lang={tool.name}
+            imageSrc={tool.imageSrc}
+            linkEnabled={linkEnabled}
+            size={size}
+          />
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-4">
+    <div class="flex items-center gap-2">
+      <div class="h-px grow bg-zinc-200 dark:bg-zinc-800"></div>
+      <div class="flex items-center gap-2">
+        <p
+          class="text-[10px] font-black tracking-[.2em] uppercase bg-linear-to-r from-riptide-500 to-mint-400 dark:from-riptide-500 dark:to-mint-500 text-transparent bg-clip-text"
+        >
+          Cyber Security & Monitoring
+        </p>
+      </div>
+      <div class="h-px grow bg-zinc-200 dark:bg-zinc-800"></div>
+    </div>
+    <div class={classes}>
+      {
+        securityTools.map((tool) => (
           <Capsule
             lang={tool.name}
             imageSrc={tool.imageSrc}
